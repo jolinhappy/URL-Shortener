@@ -1,1 +1,50 @@
-<h1>Hello</h1>
+<div class="container">
+  <div class="row justify-content-center align-items-center" style="height: 800px;">
+    <div class="card text-center" style="width: 30rem; height: 20rem;">
+      <div class="card-body">
+        <h3 class="card-title my-4">URL Shortener</h3>
+        <i class="fa fa-link fa-5x" aria-hidden="true"></i>
+        <form action="/" method="POST">
+          <div class="input-area my-4">
+            <input type="text" class="form-control" name="long" placeholder="input URL here" required>
+          </div>
+          <div class="submit-button">
+            <button type="submit" class="btn btn-primary">shorten</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="arrow-icon ml-4" style="width: 100px;">
+      <i class="fa fa-arrow-right fa-5x" aria-hidden="true"></i>
+    </div>
+
+    <div class="card text-center" style="width: 30rem; height: 20rem;">
+      <div class="card-body">
+        <h3 class="card-title my-4">URL Shortener</h3>
+        <i class="fa fa-link fa-5x" type="button" aria-hidden="true"></i>
+        <div class="success-m">
+          <div class="title mt-4 mb-3">
+            Sucess!
+          </div>
+          <div class="short-link my-4 col-12 pl-4 row mx-auto">
+            <div id="short" class="short my-auto border" style="height: 40px; width: 350px;">
+              <p class="text mt-2">短連結</p>
+            </div>
+            <div type="button" onclick="copyEvent('short')">
+              <i class="fa fa-files-o fa-2x my-auto ml-2" aria-hidden="true"></i>
+              </button>
+            </div>
+            {{!-- 複製功能 --}}
+            <script>
+              function copyEvent(id) {
+                var str = document.getElementById(id);
+                window.getSelection().selectAllChildren(str);
+                document.execCommand("copy")
+                alert("複製成功")
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
