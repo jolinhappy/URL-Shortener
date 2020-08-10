@@ -55,7 +55,7 @@ app.get('/:short', (req, res) => {
   const short = req.params.short
   Url.findOne({ short: `${short}` })
     .then((url) => {
-      return res.redirect(`${url.fullUrl}`)
+      res.redirect(`${url.fullUrl}`)
     })
     .catch(error => console.log(error))
 })
