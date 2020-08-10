@@ -6,17 +6,16 @@ const bodyParser = require('body-parser')
 const Url = require('./models/url')
 const shortener = require('./shortener')
 
-const mongoose = require('mongoose')
-const { find } = require('./models/url')
-mongoose.connect('mongodb://localhost/shortLink', { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('mongoose error!')
-})
-db.once('open', () => {
-  console.log('mongoose connected!')
-})
-
+// const mongoose = require('mongoose')
+// mongoose.connect('mongodb://localhost/shortLink', { useNewUrlParser: true, useUnifiedTopology: true })
+// const db = mongoose.connection
+// db.on('error', () => {
+//   console.log('mongoose error!')
+// })
+// db.once('open', () => {
+//   console.log('mongoose connected!')
+// })
+require('./config/mogoose')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
