@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const Url = require('./models/url')
 const shortener = require('./shortener')
 
-require('./config/mogoose')
+require('./config/mongoose')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
