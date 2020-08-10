@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   const input = req.body.fullUrl
   const checkHttp = input.indexOf('https://')
+  const head = req.headers.origin
   let long = ''
   //確保是網址
   if (checkHttp < 0) {
@@ -31,7 +32,7 @@ app.post('/', (req, res) => {
     .then(urls => {
       const checkOne = urls.find(url => { return url.fullUrl === long })
       if (checkOne) {
-        shortUrl = `http://localhost:3000/${checkOne.short}`
+        shortUrl = `${head}/${checkOne.short}`
       } else {
         shortId = shortener()
         const check = urls.find(url => url.short === shortId)
@@ -42,7 +43,7 @@ app.post('/', (req, res) => {
             fullUrl: `${long}`,
             short: `${shortId}`
           })
-          shortUrl = `http://localhost:3000/${shortId}`
+          shortUrl = `${head}/${shortId}`
         }
       }
     })
