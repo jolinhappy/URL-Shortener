@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const Url = require('./models/url')
@@ -69,6 +69,6 @@ app.get('/:short', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}`)
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}`)
 })
