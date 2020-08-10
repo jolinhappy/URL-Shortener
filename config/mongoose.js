@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const MOGODB_URI = process.env.MOGODB_URI || 'mongodb://localhost/shortLink'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/shortLink'
 mongoose.connect(MOGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', () => {

@@ -1,7 +1,7 @@
 const Url = require('../url')
 const shortener = require('../../shortener')
 
-const db = require('../../config/mogoose')
+const db = require('../../config/mongoose')
 db.once('open', () => {
   const shortPart = shortener()
   Url.create(
