@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.post('/url', (req, res) => {
+app.post('/', (req, res) => {
   const input = req.body.fullUrl
   const checkHttp = input.indexOf('https://')
   let long = ''
