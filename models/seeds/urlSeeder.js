@@ -11,7 +11,7 @@ db.once('open', () => {
   const shortPart = shortener()
   Url.create(
     {
-      long: 'https://www.facebook.com/',
+      fullUrl: 'https://www.facebook.com/',
       short: `${shortPart}`
     }
   )

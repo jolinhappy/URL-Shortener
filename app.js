@@ -7,6 +7,7 @@ const Url = require('./models/url')
 const shortener = require('./shortener')
 
 const mongoose = require('mongoose')
+const { find } = require('./models/url')
 mongoose.connect('mongodb://localhost/shortLink', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', () => {
@@ -26,16 +27,21 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const long = req.body.long
+  const input = req.body.fullUrl
+  const checkHttp = input.indexOf('https://')
+  let long = ''
+  //確保是網址
+  if (checkHttp < 0) {
+    long = `https://${input}`
+  } else { long = `${input}` }
   let shortUrl = ''
   let shortId = ''
   Url.find()
     .lean()
     .then(urls => {
-      const findOne = urls.find(url => { return url.long === long })
-      // console.log(ans)
-      if (findOne) {
-        shortUrl = `http://localhost:3000/${findOne.short}`
+      const checkOne = urls.find(url => { return url.fullUrl === long })
+      if (checkOne) {
+        shortUrl = `http://localhost:3000/${checkOne.short}`
       } else {
         shortId = shortener()
         const check = urls.find(url => url.short === shortId)
@@ -43,8 +49,8 @@ app.post('/', (req, res) => {
           shortId = shortener()
         } else {
           Url.create({
-            long: long,
-            short: shortId
+            fullUrl: `${long}`,
+            short: `${shortId}`
           })
           shortUrl = `http://localhost:3000/${shortId}`
         }
@@ -54,6 +60,15 @@ app.post('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//short URL redirect
+app.get('/:short', (req, res) => {
+  const short = req.params.short
+  Url.findOne({ short: `${short}` })
+    .then((url) => {
+      return res.redirect(`${url.fullUrl}`)
+    })
+    .catch(error => console.log(error))
+})
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
